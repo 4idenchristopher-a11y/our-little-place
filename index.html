@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>aideen's little space</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- FONT -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400&display=swap" rel="stylesheet">
+
+  <style>
+    body {
+      margin: 0;
+      min-height: 100vh;
+      background-color: #C9E9E7;
+      font-family: 'Poppins', sans-serif;
+      display: flex;
+      justify-content: center;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 420px;
+      padding: 20px;
+      box-sizing: border-box;
+    }
+
+    .box {
+      background: white;
+      padding: 22px;
+      border-radius: 18px;
+      margin: auto;
+      box-shadow: 0 15px 30px rgba(0,0,0,0.12);
+      animation: floatIn 1.2s ease;
+    }
+
+    @keyframes floatIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    img {
+      width: 220px;
+      border-radius: 20px;
+      margin-bottom: 15px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+    }
+
+    h1 {
+      color: #6B7F7F;
+      font-size: 20px;
+      margin-top: 10px;
+    }
+
+    p {
+      font-size: 13px;
+      color: #6B7F7F;
+      line-height: 1.6;
+    }
+
+    .divider {
+      margin: 14px 0;
+      font-size: 12px;
+      opacity: 0.5;
+    }
+
+    audio {
+      width: 100%;
+      margin-top: 12px;
+    }
+
+    /* typing text */
+    #typing-name, #typing-desc {
+      min-height: 18px;
+    }
+
+    /* mood jar */
+    .mood-title {
+      font-size: 12px;
+      opacity: 0.7;
+      margin-top: 14px;
+    }
+
+    .mood-buttons span {
+      font-size: 22px;
+      margin: 6px;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+
+    .mood-buttons span:hover {
+      transform: scale(1.2);
+    }
+
+    .mood-jar {
+      margin-top: 10px;
+      min-height: 55px;
+      border-radius: 14px;
+      background: rgba(255,255,255,0.5);
+      padding: 8px;
+      font-size: 18px;
+    }
+
+    #moodText {
+      font-size: 12px;
+      margin-top: 8px;
+      opacity: 0.7;
+    }
+
+    /* ngl */
+    .ngl-btn {
+      display: inline-block;
+      margin-top: 10px;
+      padding: 9px 20px;
+      background: #C9E9E7;
+      color: #6B7F7F;
+      border-radius: 25px;
+      font-size: 12px;
+      text-decoration: none;
+      transition: 0.3s;
+    }
+
+    .ngl-btn:hover {
+      transform: scale(1.05);
+    }
+
+    /* leave quietly */
+    .leave-btn {
+      margin-top: 14px;
+      font-size: 11px;
+      opacity: 0.5;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .leave-btn:hover {
+      opacity: 0.8;
+    }
+
+    .fade-out {
+      animation: fadeOut 0.8s forwards;
+    }
+
+    @keyframes fadeOut {
+      to { opacity: 0; transform: translateY(10px); }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <div class="box">
+
+      <img src="dino.jpg" alt="aideen">
+
+      <p id="typing-name"></p>
+      <p id="typing-desc"></p>
+
+      <div class="divider">──── ✿ ────</div>
+
+      <h1>hello there 💗</h1>
+
+      <p>
+        this is my little space,<br>
+        dibuat cuma buat fun & senang-senang 🌸
+      </p>
+
+      <p>
+        kadang suka diem,<br>
+        kadang rame sendiri,<br>
+        and that's okay 🤍
+      </p>
+
+      <audio controls>
+        <source src="soft.mp3" type="audio/mpeg">
+      </audio>
+
+      <!-- MOOD JAR -->
+      <div class="divider">──── mood jar ────</div>
+
+      <p class="mood-title">how are you feeling right now?</p>
+
+      <div class="mood-buttons">
+        <span onclick="addMood('😩')">😩</span>
+        <span onclick="addMood('😔')">😔</span>
+        <span onclick="addMood('🙂')">🙂</span>
+        <span onclick="addMood('😌')">😌</span>
+        <span onclick="addMood('🤗')">🤗</span>
+        <span onclick="addMood('🥰')">🥰</span>
+        <span onclick="addMood('😚')">😚</span>
+      </div>
+
+      <div class="mood-jar" id="moodJar"></div>
+      <p id="moodText"></p>
+
+      <p style="font-size:11px; opacity:0.6;">
+        every feeling left here stays gently ✿
+      </p>
+
+      <div class="divider">──── say something ────</div>
+
+      <p style="font-size:11px; opacity:0.7;">
+        kamu juga bisa ninggalin pesan anonim 🤍
+      </p>
+
+      <a href="https://ngl.link/41deen" target="_blank" class="ngl-btn">
+        💭 leave a soft message
+      </a>
+
+      <p class="leave-btn" onclick="leaveQuietly()">
+        leave quietly 🌙
+      </p>
+
+      <p style="font-size:11px; opacity:0.6;">
+        ⋆｡˚ welcome to my tiny world ✨
+      </p>
+
+    </div>
+  </div>
+
+  <script>
+    /* typing effect */
+    const text1 = "🌷 hi, i'm aideen";
+    const text2 = "just a random soul wandering on the internet ✨";
+    let i = 0, j = 0;
+
+    function typeName() {
+      if (i < text1.length) {
+        document.getElementById("typing-name").innerHTML += text1.charAt(i++);
+        setTimeout(typeName, 80);
+      } else setTimeout(typeDesc, 300);
+    }
+
+    function typeDesc() {
+      if (j < text2.length) {
+        document.getElementById("typing-desc").innerHTML += text2.charAt(j++);
+        setTimeout(typeDesc, 60);
+      }
+    }
+    typeName();
+
+    /* mood messages */
+    const moodMessages = {
+      "😩": [
+        "you’ve been carrying too much for too long.",
+        "it’s okay to stop and breathe.",
+        "being tired doesn’t mean you failed."
+      ],
+      "😔": [
+        "sadness deserves space.",
+        "you don’t have to smile here.",
+        "your feelings are valid."
+      ],
+      "🙂": [
+        "being okay is enough today.",
+        "neutral days still count.",
+        "peace is still progress."
+      ],
+      "😌": [
+        "this calm feels earned.",
+        "nothing needs fixing right now.",
+        "rest looks good on you."
+      ],
+      "🤗": [
+        "imagine a warm hug.",
+        "you deserve comfort.",
+        "you are safe here."
+      ],
+      "🥰": [
+        "this softness is beautiful.",
+        "joy looks gentle on you.",
+        "hold this feeling close."
+      ],
+      "😚": [
+        "a tiny kiss of comfort.",
+        "sweet moments matter.",
+        "be kind to yourself."
+      ]
+    };
+
+    function addMood(emoji) {
+      const jar = document.getElementById("moodJar");
+      jar.innerHTML += `<span style="margin:2px;">${emoji}</span>`;
+
+      const messages = moodMessages[emoji];
+      const random = Math.floor(Math.random() * messages.length);
+      document.getElementById("moodText").innerText = messages[random];
+
+      let moods = JSON.parse(localStorage.getItem("moods")) || [];
+      moods.push(emoji);
+      localStorage.setItem("moods", JSON.stringify(moods));
+    }
+
+    window.onload = () => {
+      const saved = JSON.parse(localStorage.getItem("moods")) || [];
+      const jar = document.getElementById("moodJar");
+      saved.forEach(m => {
+        jar.innerHTML += `<span style="margin:2px;">${m}</span>`;
+      });
+    };
+
+    function leaveQuietly() {
+      const box = document.querySelector(".box");
+      box.classList.add("fade-out");
+      setTimeout(() => {
+        box.classList.remove("fade-out");
+      }, 900);
+    }
+  </script>
+
+</body>
+</html>
